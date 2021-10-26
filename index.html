@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <!-- den här raden hämtar din css från den andra filen -->
+        <link rel="stylesheet" href="index.css">
+        <!-- Det här är för att kunna använda vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <!-- Längst ut måste det finnas en div som har id=app -->
+        <div id="app">
+            <!-- För att använda en variabel inuti en tagg sätt den innanför {} -->
+            <label>{{ responseText }}</label>
+
+            <!-- För att använda en variabel i ett attribut skriver man v-bind: innan attributnamnet -->
+            <!-- Med v-model="data-variabel" kopplar man "automatiskt" ihop en input med en variabel -->
+            <input type="number" min="1" v-bind:max="maxInput" v-model="guessInputValue">
+            <!-- Knappar  -->
+            <button @click="startBaby()">Starta baby</button>
+
+            <button @click="guessing()">Gissa</button>
+
+            <label>Gissningar</label>
+            <label>{{ guesses }}</label>
+            
+        </div>
+        <!-- den här raden hämtar din javascript från den andra filen -->
+        <script src="index.js"></script>
+    </body>
+</html>
