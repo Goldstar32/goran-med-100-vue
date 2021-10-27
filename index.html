@@ -6,22 +6,31 @@
     </head> 
     <body>
         <div id="app">
-            <div v-if="menu">
+            <div v-if="scene === 'menu'">
                 <button id="babyButton" class="difficultyButton" @click="startGame(10)">Bebis</button>
                 <button id="easyButton" class="difficultyButton" @click="startGame(50)">Lätt</button>
                 <button id="normalButton" class="difficultyButton" @click="startGame(100)">Normal</button>
                 <button id="hardButton" class="difficultyButton" @click="startGame(1000)">Svår</button>
                 <button id="impossibleButton" class="difficultyButton" @click="startGame(1000000)">Omöjlig</button>
                 <label>Välj svårighetsgrad</label>
+                <br>
             </div>
-            <br>
-            <div v-if="gaming">
+            <div v-if="scene === 'scoreboard'">
+                <button id="menuButton" @click="showMenu()">Meny</button>
+                <ul>
+                    <li v-for="highscore in highscoreArray">{{ highscore.name + " " + highscore.difficulty + " " + highscore.score }}</li>
+                </ul>
+            </div>
+            <div v-if="scene === 'gaming'">
                 <label>{{ responseText }}</label>
                 <br>
-                <input id="guessInput" type="number" min="1" v-bind:max="maxInput" v-model="guessInputValue">
+                <input id="guessInput" type="number" v-if="guessButton" min="1" v-bind:max="maxInput" v-model="guessInputValue">
                 <button id="guessButton" v-if="guessButton" @click="guessing()">Gissa</button>
+                <label for="nameInput" v-if="!guessButton">Namn:</label>
+                <input id="nameInput" v-if="!guessButton" type="text" name="Namn" v-model="name">
+                <button id="nameButton" v-if="!guessButton" @click="showScoreboard()">Klar</button>
             </div>
-            <div v-if="loading">
+            <div v-if="scene === 'loading'">
                 <div class="loader">Loading...</div>
             </div>
         </div>
