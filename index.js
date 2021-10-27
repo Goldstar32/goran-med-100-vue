@@ -9,17 +9,24 @@ var app = new Vue({
         goransNumber: null,
         menu: true,
         guessButton: true,
+        loading: false,
     },
 
     methods: {
 
         startGame(max) {
-            this.guessButton = true
-            this.setResponseText("Vilket tal 1-" + max + " tänker Göran på?")
-            this.maxInput = max
-            this.gaming = true
+            this.gaming = false
             this.menu = false
-            this.goransNumber = this.getRndInteger(1, max)
+            this.loading = true
+            setTimeout(() => {
+                this.loading = false
+                this.guessButton = true
+                this.setResponseText("Vilket tal 1-" + max + " tänker Göran på?")
+                this.maxInput = max
+                this.gaming = true
+                this.goransNumber = this.getRndInteger(1, max)
+            }, (3000))
+            
         },
 
         controll(guess) {

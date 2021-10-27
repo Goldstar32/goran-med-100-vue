@@ -16,10 +16,13 @@
             </div>
             <br>
             <div v-if="gaming">
-                <input type="number" min="1" v-bind:max="maxInput" v-model="guessInputValue">
-                <button id="guessButton" v-if="guessButton" @click="guessing()">Gissa</button>
-                <br>
                 <label>{{ responseText }}</label>
+                <br>
+                <input id="guessInput" type="number" min="1" v-bind:max="maxInput" v-model="guessInputValue">
+                <button id="guessButton" v-if="guessButton" @click="guessing()">Gissa</button>
+            </div>
+            <div v-if="loading">
+                <div class="loader">Loading...</div>
             </div>
         </div>
         <script src="index.js"></script>
