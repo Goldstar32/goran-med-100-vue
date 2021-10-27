@@ -18,7 +18,10 @@
             <div v-if="scene === 'scoreboard'">
                 <button id="menuButton" @click="showMenu()">Meny</button>
                 <ul>
-                    <li v-for="highscore in highscoreArray">{{ highscore.name + " " + highscore.difficulty + " " + highscore.score }}</li>
+                    <li v-for="highscore in reversedHighscore">
+                        <label>{{ highscore.name }}</label>
+                        <label>{{ highscore.score }}</label>
+                    </li>
                 </ul>
             </div>
             <div v-if="scene === 'gaming'">

@@ -22,10 +22,18 @@ var app = new Vue({
         name: "",
     },
 
+    computed: {
+        reversedHighscore: function () {
+            return this.highscoreArray.sort((a, b) => {
+                return b.score - a.score
+            }).slice(0,10)
+        }
+    },
+
     methods: {
 
         showMenu() {
-           this.scene = "menu"
+            this.scene = "menu"
         },
 
         showLoading() {
@@ -46,12 +54,13 @@ var app = new Vue({
                 this.goransNumber = this.getRndInteger(1, max)
             }, (3000))
         },
-        
+
         createScore() {
+            var calculatedScore = this.maxInput - this.guesses * this.maxInput / 10
             var newHighscore = {
                 name: this.name,
                 difficulty: this.difficulties[this.maxInput],
-                score: this.guesses,
+                score: calculatedScore,
             }
             this.highscoreArray.push(newHighscore)
             localStorage.setItem('highScore', JSON.stringify(this.highscoreArray))
@@ -84,7 +93,7 @@ var app = new Vue({
         guessing() {
             var guess = Number(this.guessInputValue)
             this.guesses += 1;
-            this.responseText ="Göran funderar..."
+            this.responseText = "Göran funderar..."
             setTimeout(() => {
                 this.controll(guess)
             }, this.getRndInteger(300, 3000))
@@ -92,7 +101,7 @@ var app = new Vue({
         },
 
         setResponseText(responseText) {
-            this.responseText =  responseText;
+            this.responseText = responseText;
         },
 
         getRndInteger(min, max) {
