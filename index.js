@@ -1,49 +1,59 @@
 var app = new Vue({
-    // #app => sammma id som på diven i html
     el: '#app',
     data: {
-        //? innanför {} kan "globala" data-variabler läggs till
-        // * För att ändra värde på en data-variabel behöver man skriva this.variabelNamn
-        responseText: "Göran funderar...",
+        responseText: "Vad tänker Göran på?",
         maxInput: 1,
         guessInputValue: 1,
         guesses: 0,
-        showMessage: true,
-        // slut på variabler
+        gaming: false,
+        goransNumber: null,
+        menu: true,
+        guessButton: true,
     },
 
     methods: {
-        //? Funktioner ska ligga innaför här (och det behöver inte stå function framför)
-        startBaby() {
-            // TODO
-            this.showMessage = !this.showMessage
-        }, //! Det måste vara komma-tecken efter varje funktion
+
+        startGame(max) {
+            this.guessButton = true
+            this.setResponseText("Vilket tal 1-" + max + " tänker Göran på?")
+            this.maxInput = max
+            this.gaming = true
+            this.menu = false
+            this.goransNumber = this.getRndInteger(1, max)
+        },
+
+        controll(guess) {
+            if (this.goransNumber === guess) {
+                if (this.guesses != 1) {
+                    this.setResponseText("Rätt! Det tog bara " + this.guesses + " gissningar!")
+                } else {
+                    this.setResponseText("Rätt! PÅ FÖRSTA FÖRSÖKET!")
+                }
+                this.guessButton = false
+                this.menu = true
+            } else if (this.goransNumber < guess) {
+                this.setResponseText("Görans tal är lite mindre...")
+            } else if (this.goransNumber > guess) {
+                this.setResponseText("Görans tal är lite större...")
+            }
+        },
 
         guessing() {
-            //? Tidigare behövde vi hämde den såhär...
-            // var guess = Number(document.getElementById("guessId").value)
-            //? nu kan vi ta den direkt från variabeln
-            var guess = this.guessInputValue
+            var guess = Number(this.guessInputValue)
             this.guesses += 1;
-            // TODO 
-            //setResponseText("Göran funderar...")
-            setTimeout(function() {
-                // TODO Fortsätt här
-                // controll(guess)
+            this.responseText ="Göran funderar..."
+            setTimeout(() => {
+                this.controll(guess)
             }, this.getRndInteger(300, 3000))
             console.log("Gissningar", this.guesses)
         },
 
         setResponseText(responseText) {
-            //? Gamle sättet
-            // document.getElementById("responseId").innerText = responseText;
-            // Nye sättet
             this.responseText =  responseText;
         },
 
         getRndInteger(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
         },
-        // Slut på funktioner
     }
 });

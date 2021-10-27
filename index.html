@@ -1,29 +1,27 @@
 <html>
     <head>
-        <!-- den här raden hämtar din css från den andra filen -->
         <link rel="stylesheet" href="index.css">
-        <!-- Det här är för att kunna använda vue -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    </head>
+        <title>Göran med 1000</title>
+    </head> 
     <body>
-        <!-- Längst ut måste det finnas en div som har id=app -->
         <div id="app">
-            <!-- För att använda en variabel inuti en tagg sätt den innanför {} -->
-            <label>{{ responseText }}</label>
-
-            <!-- För att använda en variabel i ett attribut skriver man v-bind: innan attributnamnet -->
-            <!-- Med v-model="data-variabel" kopplar man "automatiskt" ihop en input med en variabel -->
-            <input type="number" min="1" v-bind:max="maxInput" v-model="guessInputValue">
-            <!-- Knappar  -->
-            <button @click="startBaby()">Starta baby</button>
-
-            <button @click="guessing()">Gissa</button>
-
-            <label>Gissningar</label>
-            <label>{{ guesses }}</label>
-            
+            <div v-if="menu">
+                <button id="babyButton" class="difficultyButton" @click="startGame(10)">Bebis</button>
+                <button id="easyButton" class="difficultyButton" @click="startGame(50)">Lätt</button>
+                <button id="normalButton" class="difficultyButton" @click="startGame(100)">Normal</button>
+                <button id="hardButton" class="difficultyButton" @click="startGame(1000)">Svår</button>
+                <button id="impossibleButton" class="difficultyButton" @click="startGame(1000000)">Omöjlig</button>
+                <label>Välj svårighetsgrad</label>
+            </div>
+            <br>
+            <div v-if="gaming">
+                <input type="number" min="1" v-bind:max="maxInput" v-model="guessInputValue">
+                <button id="guessButton" v-if="guessButton" @click="guessing()">Gissa</button>
+                <br>
+                <label>{{ responseText }}</label>
+            </div>
         </div>
-        <!-- den här raden hämtar din javascript från den andra filen -->
         <script src="index.js"></script>
     </body>
 </html>

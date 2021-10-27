@@ -1,4 +1,65 @@
-html, body {
-    margin: 5px;
-    padding: 0;
-}
+#guessButton:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+ }
+
+ #guessId {
+     height: 55px;
+     font-size: 50px;
+ }
+
+ body {
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: x-large;
+     font-weight: 600;
+ }
+
+ button {
+    background-color: rgb(173, 173, 173);
+    color: rgb(0, 0, 0);
+    border: solid 2px rgb(73, 73, 73);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 16px;
+    font-size: larger;
+ }
+ 
+ #babyButton {
+     background-color: rgb(115, 255, 255);
+     border-color: darkcyan;
+     color:darkcyan;
+ }
+ .difficultyButton {
+     width: 150px;
+     transition: width 1s;
+ }
+ .difficultyButton:hover {
+     color: rgb(255, 255, 255);
+     width: 200px;
+ }
+
+ #easyButton {
+     background-color: rgb(45, 255, 91);
+     border-color: rgb(11, 85, 29);
+     color:rgb(11, 85, 29);
+ }
+
+ #normalButton {
+     background-color: rgb(242, 255, 65);
+     border-color: rgb(109, 119, 20);
+     color:rgb(109, 119, 20);
+ }
+
+ #hardButton {
+     background-color: rgb(255, 0, 0);
+     border-color: rgb(27, 0, 0);
+     color:rgb(27, 0, 0);
+ }
+
+ #impossibleButton {
+     background-color: rgb(162, 0, 255);
+     border-color: rgb(0, 0, 0);
+     color:rgb(0, 0, 0);
+ }
