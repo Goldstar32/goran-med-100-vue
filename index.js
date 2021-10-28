@@ -71,6 +71,7 @@ var app = new Vue({
             }
             this.highscoreArray.push(newHighscore)
             localStorage.setItem('highScore', JSON.stringify(this.highscoreArray))
+            this.setCurrentScoreboard(newHighscore.difficulty)
         },
 
         answeredCorrect() {
