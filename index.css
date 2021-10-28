@@ -1,27 +1,34 @@
  #guessButton {
-     padding-top: 7px;
-     padding-bottom: 7px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     padding-right: 10px;
     padding-left: 10px;
  }
 
+ .title {
+    font-size: 50px;
+    position: fixed;
+    top: 0px;
+    left: 200px;
+ }
+
  Input {
-     height: 55px;
-     font-size: 50px;
+    height: 55px;
+    font-size: 50px;
  }
 
  body {
-     font-family: Arial, Helvetica, sans-serif;
-     font-size: x-large;
-     font-weight: 600;
-     background-color: rgb(90, 90, 90);
-     color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    font-weight: 600;
+    background-color: rgb(90, 90, 90);
+    color: white;
  }
 
  button {
-    background-color: rgb(90, 90, 90);
+    background-color: rgb(63, 63, 63);
     color: rgb(255, 255, 255);
-    border: solid 2px rgb(90, 90, 90);
+    border: solid 0px rgb(0, 0, 0);
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 10px;
@@ -29,43 +36,95 @@
     border-radius: 16px;
     font-size: larger;
     font-weight: 600;
+    height: 50px;
  }
 
  Button:hover {
-    background-color: rgb(90, 90, 90);
+    background-color: rgb(112, 112, 112);
     color: rgb(0, 0, 0);
  }
  
- #babyButton {
-     background-color: rgb(115, 255, 255);
+ .menu {
+  position: relative;
+  text-align: center;
+  margin: auto;
  }
+
+ #goranTitle {
+  font-size: 200px;
+  position: relative;
+  text-align: center;
+  top: 0px;
+ }
+
+ .menuButton {
+    width: 700px;
+    height: 100px;
+    transition: width 0.5s, height 0.5s;
+ }
+
+  .menuButton2 {
+    background-color: rgb(53, 53, 53);
+  }
+
+ .menuButton:hover {
+    width: 800px;
+    height: 120px;
+ }
+
  .difficultyButton {
-     width: 150px;
-     transition: width 1s;
-     color: rgb(56, 56, 56);
-     border-color: black;
+    width: 150px;
+    transition: width 1s;
+    color: black;
+    border-color: black;
+    border-width: 2px;
  }
+
  .difficultyButton:hover {
-     color: rgb(255, 255, 255);
-     width: 200px;
-     border-color: white;
+    color: rgb(255, 255, 255);
+    width: 200px;
+    border-color: white;
  }
 
- #easyButton {
-     background-color: rgb(45, 255, 91);
+  .babyButton {
+      background-color: rgb(115, 255, 255);
+  }
+
+  .babyButton:hover {
+      background-color: rgb(115, 255, 255);
+  }
+
+ .easyButton {
+    background-color: rgb(45, 255, 91);
  }
 
- #normalButton {
-     background-color: rgb(238, 255, 0);
+  .easyButton:hover {
+    background-color: rgb(45, 255, 91);
+  }
+
+ .normalButton {
+    background-color: rgb(238, 255, 0);
  }
 
- #hardButton {
-     background-color: rgb(255, 0, 0);
+  .normalButton:hover {
+    background-color: rgb(238, 255, 0);
+  }
+
+ .hardButton {
+    background-color: rgb(255, 0, 0);
  }
 
- #impossibleButton {
-     background-color: rgb(162, 0, 255);
+  .hardButton:hover {
+    background-color: rgb(255, 0, 0);
+  }
+
+ .impossibleButton {
+    background-color: rgb(162, 0, 255);
  }
+
+  .impossibleButton:hover {
+    background-color: rgb(162, 0, 255);
+  }
 
  .fade-enter-active, .fade-leave-active {
     transition: opacity 2s;

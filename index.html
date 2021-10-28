@@ -6,24 +6,50 @@
     </head> 
     <body>
         <div id="app">
-            <div v-if="scene === 'menu'">
-                <button id="babyButton" class="difficultyButton" @click="startGame(10)">Bebis</button>
-                <button id="easyButton" class="difficultyButton" @click="startGame(50)">Lätt</button>
-                <button id="normalButton" class="difficultyButton" @click="startGame(100)">Normal</button>
-                <button id="hardButton" class="difficultyButton" @click="startGame(1000)">Svår</button>
-                <button id="impossibleButton" class="difficultyButton" @click="startGame(1000000)">Omöjlig</button>
-                <label>Välj svårighetsgrad</label>
+
+            <div class="menu" v-if="scene === 'menu'">
+                <label id="goranTitle">Göran med 100</label>    
                 <br>
+                <br>
+                <button class="menuButton" @click="showGameMenu()">Spela</button>
+                <br>
+                <button class="menuButton menuButton2" @click="showScoreboard">Topplistor</button>
+                <br>
+                <button class="menuButton">Instruktioner</button>
             </div>
+
+            <div v-if="scene === 'gameMenu'">
+                <button @click="showMenu()">Meny</button>
+                <label class="title">Välj svårighetsgrad</label>
+                <br>
+                <br>
+                <button class="babyButton difficultyButton" @click="startGame(10)">Bebis</button>
+                <button class="easyButton difficultyButton" @click="startGame(50)">Lätt</button>
+                <button class="normalButton difficultyButton" @click="startGame(100)">Normal</button>
+                <button class="hardButton difficultyButton" @click="startGame(1000)">Svår</button>
+                <button class="impossibleButton difficultyButton" @click="startGame(1000000)">Omöjlig</button>
+            </div>
+
             <div v-if="scene === 'scoreboard'">
-                <button id="menuButton" @click="showMenu()">Meny</button>
-                <ul>
-                    <li v-for="highscore in reversedHighscore">
-                        <label>{{ highscore.name }}</label>
-                        <label>{{ highscore.score }}</label>
-                    </li>
-                </ul>
+                <button @click="showMenu()">Meny</button>
+                <label class="title">Topplistor</label>
+                <br>
+                <br>
+                <button class="babyButton difficultyButton" @click="setCurrentScoreboard('baby')">Bebis</button>
+                <button class="easyButton difficultyButton" @click="setCurrentScoreboard('easy')">Lätt</button>
+                <button class="normalButton difficultyButton" @click="setCurrentScoreboard('normal')">Normal</button>
+                <button class="hardButton difficultyButton" @click="setCurrentScoreboard('hard')">Svår</button>
+                <button class="impossibleButton difficultyButton" @click="setCurrentScoreboard('impossible')">Omöjlig</button>
+                <div>
+                    <ul>
+                        <li v-for="highscore in reversedHighscore">
+                            <label>{{ highscore.name }}</label>
+                            <label>{{ highscore.score }}</label>
+                        </li>
+                    </ul>
+                </div>
             </div>
+
             <div v-if="scene === 'gaming'">
                 <label>{{ responseText }}</label>
                 <br>
@@ -33,6 +59,7 @@
                 <input id="nameInput" v-if="!guessButton" type="text" name="Namn" v-model="name">
                 <button id="nameButton" v-if="!guessButton" @click="showScoreboard()">Klar</button>
             </div>
+
             <div v-if="scene === 'loading'">
                 <div class="loader">Loading...</div>
             </div>
