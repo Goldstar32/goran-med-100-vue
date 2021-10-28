@@ -5,11 +5,8 @@ var app = new Vue({
         maxInput: 1,
         guessInputValue: 1,
         guesses: 0,
-        gaming: false,
         goransNumber: null,
-        menu: true,
         guessButton: true,
-        loading: false,
         highscoreArray: JSON.parse(localStorage.getItem('highScore') || "[]"),
         difficulties: {
             10: "baby",
@@ -37,37 +34,29 @@ var app = new Vue({
 
     methods: {
 
+        saveHighscore() {
+            this.showNewScene('scoreboard')
+            this.createScore()
+        },
+
+        getScoreboardButtonClass(difficulty) {
+           return this.currentScoreboard === difficulty ? 'buttonSelected'  : ''
+        },
+
         setCurrentScoreboard(difficulty) {
             this.currentScoreboard = difficulty
         },
 
-        showMenu() {
-            this.scene = "menu"
-        },
-
-        showGameMenu() {
-            this.scene = "gameMenu"
-        },
-
-        showScoreboard() {
-            this.createScore()
-            this.scene = "scoreboard"
-        },
-
-        showGaming() {
-            this.scene = "gaming"
-            this.guessButton = "true"
-        },
-
-        showLoading() {
-            this.scene = "loading"
+        showNewScene(scene) {
+            this.scene = scene
         },
 
         startGame(max) {
-            this.showLoading()
+            this.guessButton = true
+            this.showNewScene("loading")
             this.guesses = 0
             setTimeout(() => {
-                this.showGaming()
+                this.showNewScene("gaming")
                 this.setResponseText(`Vilket tal 1-${max} tänker Göran på?`)
                 this.maxInput = max
                 this.goransNumber = this.getRndInteger(1, max)
@@ -75,7 +64,6 @@ var app = new Vue({
         },
 
         createScore() {
-            //var calculatedScore = this.maxInput - this.guesses * this.maxInput / 10
             var newHighscore = {
                 name: this.name,
                 difficulty: this.difficulties[this.maxInput],
@@ -111,7 +99,6 @@ var app = new Vue({
             setTimeout(() => {
                 this.controll(guess)
             }, this.getRndInteger(300, 3000))
-            console.log("Gissningar", this.guesses)
         },
 
         setResponseText(responseText) {

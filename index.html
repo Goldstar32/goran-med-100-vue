@@ -11,15 +11,18 @@
                 <label id="goranTitle">Göran med 100</label>    
                 <br>
                 <br>
-                <button class="menuButton" @click="showGameMenu()">Spela</button>
+                <button class="menuButton" @click="showNewScene('gameMenu')">Spela</button>
                 <br>
-                <button class="menuButton menuButton2" @click="showScoreboard">Topplistor</button>
+                <button class="menuButton menuButton2" @click="showNewScene('scoreboard')">Topplistor</button>
                 <br>
-                <button class="menuButton">Instruktioner</button>
+                <button class="menuButton" @click="">Instruktioner</button>
             </div>
 
-            <div v-if="scene === 'gameMenu'">
-                <button @click="showMenu()">Meny</button>
+            <div class="center" v-if="scene === 'gameMenu'">
+                <button class="backToMenu" @click="showNewScene('menu')">Meny</button>
+                <br>
+                <br>
+                <br>
                 <label class="title">Välj svårighetsgrad</label>
                 <br>
                 <br>
@@ -30,34 +33,43 @@
                 <button class="impossibleButton difficultyButton" @click="startGame(1000000)">Omöjlig</button>
             </div>
 
-            <div v-if="scene === 'scoreboard'">
-                <button @click="showMenu()">Meny</button>
+            <div class="center" v-if="scene === 'scoreboard'">
+                <button class="backToMenu" @click="showNewScene('menu')">Meny</button>
+                <br>
+                <br>
+                <br>
                 <label class="title">Topplistor</label>
                 <br>
                 <br>
-                <button class="babyButton difficultyButton" @click="setCurrentScoreboard('baby')">Bebis</button>
-                <button class="easyButton difficultyButton" @click="setCurrentScoreboard('easy')">Lätt</button>
-                <button class="normalButton difficultyButton" @click="setCurrentScoreboard('normal')">Normal</button>
-                <button class="hardButton difficultyButton" @click="setCurrentScoreboard('hard')">Svår</button>
-                <button class="impossibleButton difficultyButton" @click="setCurrentScoreboard('impossible')">Omöjlig</button>
+                <button class="babyButton difficultyButton" v-bind:class="{ 'difficultyButtonSelected': currentScoreboard === 'baby' }" @click="setCurrentScoreboard('baby')">Bebis</button>
+                <button class="easyButton difficultyButton" v-bind:class="{ 'difficultyButtonSelected': currentScoreboard === 'easy' }" @click="setCurrentScoreboard('easy')">Lätt</button>
+                <button class="normalButton difficultyButton" v-bind:class="{ 'difficultyButtonSelected': currentScoreboard === 'normal' }" @click="setCurrentScoreboard('normal')">Normal</button>
+                <button class="hardButton difficultyButton" v-bind:class="{ 'difficultyButtonSelected': currentScoreboard === 'hard' }" @click="setCurrentScoreboard('hard')">Svår</button>
+                <button class="impossibleButton difficultyButton" v-bind:class="{ 'difficultyButtonSelected': currentScoreboard === 'impossible' }" @click="setCurrentScoreboard('impossible')">Omöjlig</button>
                 <div>
-                    <ul>
+                    <ul v-if="reversedHighscore.length">
                         <li v-for="highscore in reversedHighscore">
                             <label>{{ highscore.name }}</label>
                             <label>{{ highscore.score }}</label>
                         </li>
                     </ul>
+                    <div v-else>
+                        <br>
+                        <label >Det finns inga rekord här ännu :(</label>
+                    </div>
+                    
                 </div>
             </div>
 
-            <div v-if="scene === 'gaming'">
-                <label>{{ responseText }}</label>
+            <div class="center" v-if="scene === 'gaming'">
+                <label id="responseText" class="title">{{ responseText }}</label>
                 <br>
                 <input id="guessInput" type="number" v-if="guessButton" min="1" v-bind:max="maxInput" v-model="guessInputValue">
+                <br>
                 <button id="guessButton" v-if="guessButton" @click="guessing()">Gissa</button>
-                <label for="nameInput" v-if="!guessButton">Namn:</label>
+                <label id="nameText" class="title" v-if="!guessButton">Namn:</label>
                 <input id="nameInput" v-if="!guessButton" type="text" name="Namn" v-model="name">
-                <button id="nameButton" v-if="!guessButton" @click="showScoreboard()">Klar</button>
+                <button id="nameButton" v-if="!guessButton" @click="saveHighscore()">Klar</button>
             </div>
 
             <div v-if="scene === 'loading'">
