@@ -2,7 +2,7 @@
     <head>
         <link rel="stylesheet" href="index.css">
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <title>Göran med 1000</title>
+        <title>Göran med 100</title>
     </head> 
     <body>
         <div id="app">
@@ -15,7 +15,9 @@
                 <br>
                 <button class="menuButton menuButton2" @click="showNewScene('scoreboard')">Topplistor</button>
                 <br>
-                <button class="menuButton" @click="">Instruktioner</button>
+                <button class="menuButton" @click="showNewScene('instructions')">Instruktioner</button>
+                <br>
+                <button class="menuButton menuButton2" @click="showNewScene('credits')">Credits</button>
             </div>
 
             <div class="center" v-if="scene === 'gameMenu'">
@@ -51,6 +53,7 @@
                         <li v-for="highscore in reversedHighscore">
                             <label>{{ highscore.name }}</label>
                             <label>{{ highscore.score }}</label>
+                            <label>Gissningar</label>
                         </li>
                     </ul>
                     <div v-else>
@@ -59,6 +62,24 @@
                     </div>
                     
                 </div>
+            </div>
+
+            <div class="center" v-if="scene === 'instructions'">
+                <button class="backToMenu" @click="showNewScene('menu')">Meny</button>
+                <br>
+                <br>
+                <br>
+                <label class="title">Instruktioner</label>
+                <p>
+                    Göran kommer att tänka på ett tal och ditt mål är att gissa vilket tal göran tänker på. Göran kommer att berätta om hans tal är lägre eller högre än det tal du gissat på men mer hjälp än så får du inte. Lycka till!
+                </p>
+            </div>
+
+            <div class="center" v-if="scene === 'credits'">
+                <button class="backToMenu" @click="showNewScene('menu')">Meny</button>
+                <br>
+                <br>
+                <p>Göran med 100 skapades av Josua Kärnsund med viss hjälp av Elias Kärnsund.</p>
             </div>
 
             <div class="center" v-if="scene === 'gaming'">

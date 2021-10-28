@@ -7,7 +7,8 @@ var app = new Vue({
         guesses: 0,
         goransNumber: null,
         guessButton: true,
-        highscoreArray: JSON.parse(localStorage.getItem('highScore') || "[]"),
+        highscoreArray: [],
+        pointsVersion: 2,
         difficulties: {
             10: "baby",
             50: "easy",
@@ -18,6 +19,15 @@ var app = new Vue({
         scene: "menu",
         name: "",
         currentScoreboard: "",
+    },
+
+    mounted() {
+        var savedHighscoreVersion = JSON.parse(localStorage.getItem('pointsVersion') || "0")
+        if(savedHighscoreVersion !== this.pointsVersion) {
+            localStorage.clear()
+        } else {
+            this.highscoreArray = JSON.parse(localStorage.getItem('highScore') || "[]")
+        }
     },
 
     computed: {
@@ -71,6 +81,7 @@ var app = new Vue({
             }
             this.highscoreArray.push(newHighscore)
             localStorage.setItem('highScore', JSON.stringify(this.highscoreArray))
+            localStorage.setItem('pointsVersion', this.pointsVersion)
             this.setCurrentScoreboard(newHighscore.difficulty)
         },
 
